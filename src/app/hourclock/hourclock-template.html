@@ -1,0 +1,14 @@
+<div  class="form-group content">
+    <div class="timediv">
+        <span id="time">{{hour | amPm: amMode | clockNumber: 2}}:{{minute | clockNumber: 2}}</span>
+    </div>
+    <div class="clockdiv">
+        <canvas (click)="clockClick($event)" id="clockcanvas" width="300" height="300">
+            
+        </canvas>
+    </div>
+    <div class="ampm">
+        <span id="am"><button class="form-control" aria-clicked="true" id="ambutton" (click)="switchAM($event)">AM</button></span>
+        <span id="pm"><button class="form-control" aria-clicked="false" id="pmbutton" (click)="switchPM($event)">PM</button></span>
+    </div>
+</div>
