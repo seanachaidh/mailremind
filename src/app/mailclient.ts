@@ -1,15 +1,23 @@
-import { GoogleAuth } from 'google-auth-library';
-import "gapi.auth2"
+import "gapi.auth2";
+import "gapi.client.gmail";
+import { env } from "./env";
+
+declare var gapi : any;
+
+import { formatString } from "./utils";
 
 export class GMailClient {
     apikey: string;
     clientid: string;
     client: gapi.auth2.GoogleAuth;
     isAuthorized: boolean;
+    userid: string;
+    currentApiRequest: gapi.client.Request<gapi.client.gmail.Message>;
 
-    constructor(apikey: string, clientid: string) {
-        this.apikey = apikey;
-        this.clientid = clientid
+    constructor(userid: string) {
+        this.apikey = env["api-key"];
+        this.clientid = env["client-id"];
+        this.userid = userid
         gapi.client.init({
             apiKey: this.apikey,
             clientId: this.clientid
@@ -21,8 +29,47 @@ export class GMailClient {
         this.client.isSignedIn.listen(this.onSignedIn);
     }
 
-    private onSignedIn(signedIn: boolean) {
+    private sendAuthorizedApiRequest(request: gapi.client.Request<gapi.client.gmail.Message>) {
+        this.currentApiRequest = request;
+        if(this.isAuthorized) {
+            this.currentApiRequest = null;
+        } else {
+            this.client.signIn();
+        }
+    }
 
+    private onSignedIn(signedIn: boolean) {
+        if(signedIn) {
+            console.log("Successfully signed in");
+            this.isAuthorized = true;
+            if(this.currentApiRequest) {
+
+            }
+        } else {
+            this.isAuthorized = false;
+        }
+    }
+
+    public sendEmail(m: string, to: string) {
+        var msg = {
+            payload: {
+                headers: [
+                    {
+                        "To": to
+                    }
+                ],
+                mimeType: "text/plain",
+                body: {
+                    data: btoa(m)
+                }
+            }
+        }
+        var request = gapi.client.request({
+            "method": "POST",
+            "path": formatString("/gmail/v1/users/{userId}/messages/send", {"userId": this.userid}),
+            "params": msg
+        });
+        this.sendAuthorizedApiRequest(request);
     }
 
 }

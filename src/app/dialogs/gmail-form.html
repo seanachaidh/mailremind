@@ -1,0 +1,17 @@
+<div>
+    <div class="currentuser">
+        <div>
+            <span class="infolabel">Name: </span>
+            <span class="infovalue">{{name}}</span>
+        </div>
+        <div>
+            <span class="infolabel">Email: </span>
+            <span class="infovalue">{{email}}</span>
+        </div>
+    </div>
+    <div class="control-area">
+        <button class="form-control" (click)="onLoginClick($event)" disabled={{isLoggedIn}}>Login</button>
+        <button class="form-control">History</button>
+        <button class="form-control" (click)="onRevokeClick($event)" disabled={{!isLoggedIn}}>Revoke tokens</button>
+    </div>
+</div>

@@ -44,3 +44,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+#environment file for the google oauth
+src/app/env.json
+src/app/env.ts

@@ -15,7 +15,7 @@
       "es2018",
       "dom"
     ],
-    "types": ["gapi", "gapi.auth2"]
+    "types": ["gapi", "gapi.auth2", "gapi.client.gmail"]
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

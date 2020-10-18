@@ -1,13 +1,14 @@
-import { Mailclient } from "./mailclient"
+import { env } from "./env";
 
-describe("Mailclient", function(){
-    var socket: Mailclient;
-    beforeAll(() => {
-        socket = new Mailclient("smtp://smtp.antagonist.nl");
+function clearCookies() {
+    //nog niets
+}
+/*
+describe(#mailclient, function() {
+    var client: GMailClient;
+    
+    beforeAll(function() {
+        client = new GMailClient(env["testid"];
     });
-
-    it("Should send messages", function() {
-        socket.sendMessage("ELHO");
-    });
-
-})
+    
+*/
