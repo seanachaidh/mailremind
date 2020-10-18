@@ -10,8 +10,8 @@
         </div>
     </div>
     <div class="control-area">
-        <button class="form-control" (click)="onLoginClick($event)" disabled={{isLoggedIn}}>Login</button>
+        <button *ngIf="!isLoggedIn" class="form-control" (click)="onLoginClick($event)">Login</button>
+        <button *ngIf="isLoggedIn" class="form-control" (click)="onRevokeClick($event)">Revoke tokens</button>
         <button class="form-control">History</button>
-        <button class="form-control" (click)="onRevokeClick($event)" disabled={{!isLoggedIn}}>Revoke tokens</button>
     </div>
 </div>

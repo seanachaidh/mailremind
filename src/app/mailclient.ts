@@ -1,8 +1,4 @@
-import "gapi.auth2";
-import "gapi.client.gmail";
 import { env } from "./env";
-
-declare var gapi : any;
 
 import { formatString } from "./utils";
 
