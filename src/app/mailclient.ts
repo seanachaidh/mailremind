@@ -1,6 +1,7 @@
 import { env } from "./env";
 
 import { formatString } from "./utils";
+import { gapi } from "./google";
 
 export class GMailClient {
     apikey: string;

@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { GMailClient } from "../mailclient";
 import { CookieService } from "ngx-cookie-service";
 
+
 @Component({
     selector: "gmail-form",
     templateUrl: "./gmail-form.html",
@@ -21,6 +22,10 @@ export class GmailForm {
     private revokeButton: HTMLButtonElement;
     private loginButton: HTMLButtonElement;
     
+    
+    private cookies: CookieService;
+    
+    //TODO: Deze functie is nutteloos
     private setVars() {
         this.client = new GMailClient(this.userid);
     }
@@ -33,14 +38,20 @@ export class GmailForm {
         } else {
             this.token = '';
             this.email = '';
-            this.name = "";
+            this.name = '';
             this.isLoggedIn = false;
+            this.setVars();
         }
-        
+        this.cookies = cookieService
     }
     
     public onLoginClick(event: Event) {
-        
+        console.log("Clicking login handled");
+        if(!this.cookies.check("oauthtoken")) {
+            this.client.client.signIn(); //TODO: dit kan beter geprogrammeerd worden
+        } else {
+            //show warning
+        }
     }
     
     public onRevokeClick(event: Event) {

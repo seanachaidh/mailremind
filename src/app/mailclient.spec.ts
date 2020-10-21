@@ -1,14 +1,17 @@
-import { env } from "./env";
+import { GmailForm } from "./dialogs/gmail-form";
+
 
 function clearCookies() {
     //nog niets
 }
-/*
-describe(#mailclient, function() {
-    var client: GMailClient;
+describe('#googleLogin', function() {
     
-    beforeAll(function() {
-        client = new GMailClient(env["testid"];
+    var fixture: ComponentFixture<GmailForm>;
+    
+    beforeEach(function() {
+        Testbed.configureTestingModule({
+            declarations: [GmailForm]
+        });
+        fixture = Testbed.createComponent(GmailForm);
     });
-    
-*/
+});
